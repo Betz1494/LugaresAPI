@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 namespace LugaresAPI.Models.Entidades
 {
     public class LugarConsulta
-    {
-        
+    {      
         public int Id { get; set; }      
         public string Nombre { get; set; }     
         public string Localizacion { get; set; }
