@@ -1,4 +1,5 @@
 using LugaresAPI.Data;
+using LugaresAPI.Mapper;
 using LugaresAPI.Repository;
 using LugaresAPI.Repository.IRepository;
 using Microsoft.AspNetCore.Builder;
@@ -32,8 +33,9 @@ namespace LugaresAPI
             //Conexion a Base De Datos
             services.AddDbContext<ConexionBD>(options => options.UseSqlServer(Configuration.GetConnectionString("Conexion")));
 
-
             services.AddScoped<ILugarRepository, LugarRepository>();
+
+            services.AddAutoMapper(typeof(LugaresMappings));
 
             services.AddControllers();
         }
