@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,6 +39,34 @@ namespace LugaresAPI
 
             services.AddAutoMapper(typeof(LugaresMappings));
 
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("InfoAPILugares",
+                    new Microsoft.OpenApi.Models.OpenApiInfo()
+                    {
+                        Title = "Lugares API",
+                        Version = "1",
+                        Description = "Desarrollo de una API",
+                        Contact = new Microsoft.OpenApi.Models.OpenApiContact()
+                        {
+                            Email = "betzaithaburto@gmail.com",
+                            Name = "Betzait Aburto"
+                        },
+                        License = new Microsoft.OpenApi.Models.OpenApiLicense()
+                        {
+                            Name = "MIT License",
+                            Url = new Uri("https://en.wikipedia.org/wiki/MIT_License")
+                        }
+                    });
+
+                var xmlComentarios = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlComentariosFullPath = Path.Combine(AppContext.BaseDirectory, xmlComentarios);
+                options.IncludeXmlComments(xmlComentariosFullPath);
+
+            });
+
+            
+
             services.AddControllers();
         }
 
@@ -49,6 +79,14 @@ namespace LugaresAPI
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/InfoAPILugares/swagger.json", "Lugares API");
+                options.RoutePrefix = "";
+            });
 
             app.UseRouting();
 

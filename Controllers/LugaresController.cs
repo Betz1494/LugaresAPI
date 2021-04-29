@@ -24,6 +24,10 @@ namespace LugaresAPI.Controllers
             mapper = _mapper;
         }
 
+        /// <summary>
+        /// Obtiene la Lista de todos los Lugares
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult ObtenerTodosLugares()
         {
@@ -38,6 +42,12 @@ namespace LugaresAPI.Controllers
             return Ok(consulta);
         }
 
+
+        /// <summary>
+        /// Obtiene Un Lugar dado un ID
+        /// </summary>
+        /// <param name="IdLugar">El Id del Lugar</param>
+        /// <returns></returns>
         [HttpGet("{IdLugar:int}", Name = "ObtieneLugar")]
         public IActionResult ObtieneLugar(int IdLugar)
         {

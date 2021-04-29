@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LugaresAPI</name>
+    </assembly>
+    <members>
+        <member name="M:LugaresAPI.Controllers.LugaresController.ObtenerTodosLugares">
+            <summary>
+            Obtiene la Lista de todos los Lugares
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LugaresAPI.Controllers.LugaresController.ObtieneLugar(System.Int32)">
+            <summary>
+            Obtiene Un Lugar dado un ID
+            </summary>
+            <param name="IdLugar">El Id del Lugar</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
