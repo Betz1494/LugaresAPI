@@ -13,6 +13,7 @@ namespace LugaresAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)] //Lo tomen todos los metodos
     public class LugaresController : Controller
     {
         private ILugarRepository repository;
@@ -29,6 +30,7 @@ namespace LugaresAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(List<LugarConsulta>))]
         public IActionResult ObtenerTodosLugares()
         {
             var ObjLugares = repository.ObtenerLugares();
@@ -49,6 +51,9 @@ namespace LugaresAPI.Controllers
         /// <param name="IdLugar">El Id del Lugar</param>
         /// <returns></returns>
         [HttpGet("{IdLugar:int}", Name = "ObtieneLugar")]
+        [ProducesResponseType(200, Type = typeof(LugarConsulta))]
+        [ProducesResponseType(404)] //return NotFound();
+        [ProducesDefaultResponseType]
         public IActionResult ObtieneLugar(int IdLugar)
         {
             var lugar = repository.GetLugar(IdLugar);
@@ -60,10 +65,24 @@ namespace LugaresAPI.Controllers
 
             var consulta = mapper.Map<LugarConsulta>(lugar);
 
+            #region SinMapper
+            /*var consulta = new LugarConsulta() 
+              {
+                 Creacion = lugar.Creacion,
+                 Id = lugar.Id,
+                 Nombre = lugar.Nombre,
+                 Inauguracion = lugar.Inauguracion
+              };*/
+            #endregion
+
             return Ok(consulta);
         }
 
         [HttpPost]
+        [ProducesResponseType(201, Type = typeof(LugarConsulta))]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)] 
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult CreaLugar([FromBody] LugarConsulta consulta)
         {
             //Validaciones
@@ -95,6 +114,9 @@ namespace LugaresAPI.Controllers
         }
 
         [HttpPatch("{IdLugar:int}", Name = "ActualizaLugar")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult ActualizaLugar(int IdLugar,[FromBody] LugarConsulta consulta)
         {
             //Validaciones
@@ -115,6 +137,10 @@ namespace LugaresAPI.Controllers
         }
 
         [HttpDelete("{IdLugar:int}", Name = "EliminaLugar")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult EliminaLugar(int IdLugar)
         {
             //Validaciones
