@@ -15,6 +15,7 @@ namespace LugaresAPI.Data
         }
 
         public DbSet<Lugar> Lugar { get; set; }
+        public DbSet<Actividad> Actividad { get; set; }
 
     }
 }
