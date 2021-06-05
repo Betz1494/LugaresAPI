@@ -10,7 +10,7 @@ namespace LugaresAPI.Repository.IRepository
     {
         ICollection<Actividad> ObtenerActividades();
 
-        ICollection<Actividad> ObtieneActividadesxActividad(int IdLug);
+        ICollection<Actividad> ObtieneActividadesxActividad(int IdActividad);
 
         Actividad GetActividad(int IdActividad);
 
