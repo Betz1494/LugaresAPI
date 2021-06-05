@@ -4,6 +4,19 @@
         <name>LugaresAPI</name>
     </assembly>
     <members>
+        <member name="M:LugaresAPI.Controllers.ActividadController.ObtenerTodosActividades">
+            <summary>
+            Obtiene la Lista de las actividades
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LugaresAPI.Controllers.ActividadController.ObtieneActividad(System.Int32)">
+            <summary>
+            Obtiene Una Actividad dado un ID
+            </summary>
+            <param name="IdActividad">El Id de la Actividad</param>
+            <returns></returns>
+        </member>
         <member name="M:LugaresAPI.Controllers.LugaresController.ObtenerTodosLugares">
             <summary>
             Obtiene la Lista de todos los Lugares

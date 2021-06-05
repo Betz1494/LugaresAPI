@@ -36,6 +36,7 @@ namespace LugaresAPI
             services.AddDbContext<ConexionBD>(options => options.UseSqlServer(Configuration.GetConnectionString("Conexion")));
 
             services.AddScoped<ILugarRepository, LugarRepository>();
+            services.AddScoped<IActividadRepository, ActividadRepository>();
 
             services.AddAutoMapper(typeof(LugaresMappings));
 
